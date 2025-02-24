@@ -1,0 +1,15 @@
+.Body{
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  top: 20vh;
+  margin-left: 20%;
+  margin-right: 5%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2%;
+}
+
+.Content{
+  color: black;
+}
