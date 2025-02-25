@@ -1,13 +1,19 @@
-import Layout from "../components/Layout";
-import '../css/Home.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Sidebar from "../components/Layout";
+import VistaPaciente from "./ViewPacientes";
+import "../css/Home.css";
 
 function Home() {
   return (
-    <div>
-      <Layout />
+    <Router>
+      <Sidebar />
       <div className="Body">
+        <Routes>
+          <Route path="/" /> {/*Aqui va el dashboar principal cuando se creen los componentes del mismo*/}
+          <Route path="/pacientes" element={<VistaPaciente />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
