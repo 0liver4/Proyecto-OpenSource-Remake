@@ -6,5 +6,5 @@ import './css/main.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Home />
-  </StrictMode>,
+  </StrictMode>
 )

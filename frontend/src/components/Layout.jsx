@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/Logo.png";
 import "../css/Layout.css";
 
@@ -6,40 +7,58 @@ function Sidebar() {
     <div className="Layout">
       <div className="Sidebar-body">
         <div className="Logo">
-          <img src={Logo} alt="Logo"></img>
+          <NavLink to="/">
+            <img src={Logo} alt="Logo" />
+          </NavLink>
         </div>
         <div className="Navbar-Items">
           <ul>
             <li>
-              <a href="">Inicio</a>
+              <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}> 
+                Inicio 
+              </NavLink>
             </li>
             <li>
-              <a href="">Pacientes</a>
+              <NavLink to="/pacientes" className={({ isActive }) => (isActive ? "active" : "")}>
+                Pacientes
+              </NavLink>
             </li>
             <li>
-              <a href="">Farmacos</a>
+              <NavLink to="/farmacos" className={({ isActive }) => (isActive ? "active" : "")}>
+                Fármacos
+              </NavLink>
             </li>
             <li>
-              <a href="">Ubicaciones</a>
+              <NavLink to="/ubicaciones" className={({ isActive }) => (isActive ? "active" : "")}>
+                Ubicaciones
+              </NavLink>
             </li>
             <li>
-              <a href="">Marcas</a>
+              <NavLink to="/marcas" className={({ isActive }) => (isActive ? "active" : "")}>
+                Marcas
+              </NavLink>
             </li>
             <li>
-              <a href="">Tipos de Farmacos</a>
+              <NavLink to="/tipos-farmacos"className={({ isActive }) => (isActive ? "active" : "")}>
+                Tipos de Fármacos
+              </NavLink>
             </li>
             <li>
-              <a href="">Medicos</a>
+              <NavLink to="/medicos" className={({ isActive }) => (isActive ? "active" : "")}>
+                Médicos
+              </NavLink>
             </li>
             <li>
-              <a href="">Registro de visitas</a>
+              <NavLink to="/registro-visitas" className={({ isActive }) => (isActive ? "active" : "")}>
+                Registro de visitas
+              </NavLink>
             </li>
           </ul>
         </div>
       </div>
       <div className="Navbar">
         <div className="Title">
-          <h1>Dispensario Medico UNAPEC</h1>
+          <h1>Dispensario Médico UNAPEC</h1>
         </div>
       </div>
     </div>
