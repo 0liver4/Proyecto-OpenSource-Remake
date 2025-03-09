@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "../components/Layout";
-import VistaPaciente from "./ViewPacientes";
+import PacientesView from "./PacientesView";
+import LoginView from "./LoginView";
 import "../css/Home.css";
 
 function Home() {
@@ -9,8 +10,8 @@ function Home() {
       <Sidebar />
       <div className="Body">
         <Routes>
-          <Route path="/" /> {/*Aqui va el dashboar principal cuando se creen los componentes del mismo*/}
-          <Route path="/pacientes" element={<VistaPaciente />} />
+          <Route path="/" element={<LoginView />} />  {/*Aqui va el dashboar principal cuando se creen los componentes del mismo*/}
+          <Route path="/pacientes" element={<PacientesView />} />
         </Routes>
       </div>
     </Router>

@@ -1,3 +1,20 @@
-.Titulo h1{
+.Title_Content{
     color: black;
+}
+
+
+.tablaPacientes{
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tablaPacientes th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.selected {
+    background-color: lightblue; /* Color para la fila seleccionada */
 }
