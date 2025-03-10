@@ -1,0 +1,59 @@
+.ButtonContainer{
+width: 100%;
+display: flex;
+flex-wrap: nowrap;
+justify-content: space-between;
+margin: 10px;
+position: static;
+
+}
+
+.Delete{
+    background-color: red;
+    min-width: 80px;
+    min-height: 40;
+    color: white;
+    border-radius: 10px;
+    border-color: black;
+    border: 0;
+    padding: 5%;
+    transition: background 0.3s;
+}
+
+.Add{
+    background-color: green;
+    width: 80px;
+    height: 40px;
+    color: white;
+    border-radius: 10px;
+    border-color: black;
+    border: 0;
+    padding: 5%;
+    transition: background 0.3s;
+}
+
+.Edit{
+    background-color: blue;
+    width: 80px;
+    height: 40px;
+    color: white;
+    border-radius: 10px;
+    border-color: black;
+    border: 0;
+    padding: 5%;
+    transition: background 0.3s;
+}
+
+.Delete:hover {
+    background-color: darkred;
+}
+
+.Add:hover {
+    background-color: darkgreen;
+}
+
+.Edit:hover {
+    background-color: darkblue;
+}
+
+

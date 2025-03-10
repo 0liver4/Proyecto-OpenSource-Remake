@@ -64,7 +64,8 @@ h1{
   }
 
   .Navbar-Items ul li a:hover{
-    color: rgba(1, 88, 167, 1)
+    color: rgba(1, 88, 167, 1);
+    font-weight: 1000;
   }
   
   .Navbar-Items ul li a.active {
