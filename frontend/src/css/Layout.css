@@ -16,7 +16,7 @@
 }
 
 .Navbar{
-    width: 100%;
+    width: 100vw;
     height: 10%;
     background-color: rgba(1, 88, 167, 1);
 
@@ -24,7 +24,7 @@
 
 .Sidebar-body{
     width: 17%;
-    height: 98.5vh;
+    height: 99vh;
     background-color: rgb(255, 255, 255);
     padding: 5px;
 }

@@ -1,0 +1,20 @@
+.Title_Content{
+    color: black;
+}
+
+
+.tablaRegistroVisitas{
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tablaRegistroVisitas th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.selected {
+    background-color: lightblue; /* Color para la fila seleccionada */
+}
