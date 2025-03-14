@@ -1,19 +1,20 @@
-import getSupabaseClient from "../../Backend/config/supabase"; 
+import getSupabaseClient from "../../Backend/config/supabase";
 
-const EditSup = async (data, tabla, columna) => {
-    const id = data.id_paciente;
+const updateSupabaseRecord = async (data, table, column) => {
+    const id = data.id_paciente || data.id_producto;
     const supabase = getSupabaseClient();
-    console.log(id,'dato en el get')
+
     if (!id) {
-        console.log("Error: ID no proporcionado");
+        console.error("Error: ID no proporcionado. Se esperaba 'id_paciente' o 'id_producto'.");
         return false;
     }
 
-    const { error } = await supabase
-        .from(tabla)
-        .update(data)
-        .eq(columna, id)
+    console.log(`Attempting to update record with ID: ${id}`);
 
+    const { error } = await supabase
+        .from(table)
+        .update(data)
+        .eq(column, id);
 
     if (error) {
         console.error("Hubo un error al editar:", error.message);
@@ -24,4 +25,4 @@ const EditSup = async (data, tabla, columna) => {
     return true;
 };
 
-export default EditSup;
+export default updateSupabaseRecord;
