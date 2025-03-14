@@ -1,6 +1,7 @@
-import getSupabaseClient from "../../Backend/config/supabase"; 
+import getSupabaseClient from "../../Backend/config/supabase";
 
 const EditSup = async (data, tabla, columna) => {
+    console.log(data,'dato en la funcion del Edit')
     const id = data.id_paciente || data.id_producto;
     const supabase = getSupabaseClient();
     console.log(id,'dato en el get')

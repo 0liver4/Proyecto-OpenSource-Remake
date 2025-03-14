@@ -3,38 +3,37 @@ import '../css/Farmacos.css';
 import '../css/Modal.css';
 import EditSup from '../../../Backend/controllers/EditSup.js';
 
-const EditProductosForm = ({ farmacos, onClose, onSuccess, isOpen }) => {
+const EditProductosForm = ({ currentItem, farmacos, onClose, onSuccess, isOpen }) => {
+
     const [formData, setFormData] = useState({
-        id_producto: '',
-        nomproducto: '',
-        catproducto: '',
-        descproducto: '',
-        marcaproducto: '',
-        estado: ''
+        id_producto: "",
+        nomproducto: "",
+        catproducto:"",
+        descproducto: "",
     });
 
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
-        if (farmacos) {
-            console.log("Datos del producto antes de establecer el estado:", producto);
+        if(currentItem) {
             setFormData({
-                id_producto: farmacos.id_producto || '',
-                nomproducto: farmacos.nomproducto || '',
-                catproducto: farmacos.catproducto || '',
-                descproducto: farmacos.descproducto || '',
-                marcaproducto: farmacos.marcaproducto || '',
-                estado: farmacos.estado || ''
-            });
+                id_producto: currentItem.id_producto ,
+                nomproducto: currentItem.nomproducto ,
+                catproducto: currentItem.catproducto ,
+                descproducto: currentItem.descproducto ,
+            })
+
         }
-    }, [farmacos]);
-    
+       
+    },[currentItem])
+
+
 
     const validateForm = () => {
         let tempErrors = {};
 
-        if (!formData.nomproducto) tempErrors.nomproducto = 'Elasdasde del producto es obligatorio';
+        if (!formData.nomproducto) tempErrors.nomproducto = 'El nombre del producto es obligatorio';
         if (!formData.catproducto) tempErrors.catproducto = 'La categoría del producto es obligatoria';
         if (!formData.descproducto) tempErrors.descproducto = 'La descripción es obligatoria';
         if (!formData.marcaproducto) tempErrors.marcaproducto = 'La marca del producto es obligatoria';
@@ -43,12 +42,25 @@ const EditProductosForm = ({ farmacos, onClose, onSuccess, isOpen }) => {
         return Object.keys(tempErrors).length === 0;
     };
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+    const handleChange = async (e) => {
+        const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
-            [name]: type === 'checkbox' ? checked : value
-        }));
+            [name]: value
+        })); 
+        
+    };
+
+    const updateTipoPaciente = async (formData) => {
+        try {
+            const success = await EditSup(
+                { ...formData,
+                id_producto: currentItem.id_producto ?? null },
+
+            );
+        } catch (error) {
+            console.error("Error al actualizar el tipo de paciente:", error);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -57,6 +69,7 @@ const EditProductosForm = ({ farmacos, onClose, onSuccess, isOpen }) => {
         if (!validateForm()) return;
 
         setIsSubmitting(true);
+        await updateTipoPaciente(formData);
 
         try {
             const success = await EditSup(formData, 'farmacos', 'id_producto');
@@ -94,7 +107,7 @@ const EditProductosForm = ({ farmacos, onClose, onSuccess, isOpen }) => {
                                 type='text'
                                 id='nomproducto'
                                 name='nomproducto'
-                                value={formData.nomproducto}
+                                value={formData.nomproducto ?? "sin nombre"}
                                 onChange={handleChange}
                             />
                             {errors.nomproducto && <span className='error'>{errors.nomproducto}</span>}
@@ -133,17 +146,6 @@ const EditProductosForm = ({ farmacos, onClose, onSuccess, isOpen }) => {
                                 onChange={handleChange}
                             />
                             {errors.marcaproducto && <span className='error'>{errors.marcaproducto}</span>}
-                        </div>
-
-                        <div className='form-group'>
-                            <label htmlFor='estado'>Estado:</label>
-                            <input
-                                type='checkbox'
-                                id='estado'
-                                name='estado'
-                                checked={formData.estado}
-                                onChange={handleChange}
-                            />
                         </div>
 
                         <div className='modal-footer'>
