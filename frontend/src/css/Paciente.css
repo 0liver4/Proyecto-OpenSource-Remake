@@ -4,17 +4,25 @@
 
 
 .tablaPacientes{
-    border: 2px solid black;
     border-collapse: collapse;
     width: 100%;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.tablaPacientes th, td {
-    border: 1px solid black;
+.tablaPacientes th, .tablaPacientes td {
     padding: 8px;
     text-align: left;
+    border-bottom: 1px solid #cbcbcb;
 }
 
 .selected {
-    background-color: lightblue; /* Color para la fila seleccionada */
+    background-color: #cbdfff; /* Color para la fila seleccionada */
 }
+thead{
+    background-color:white;
+    border-bottom: 1px solid #cbcbcb;
+}
+tbody {
+    background-color: rgb(248, 248, 248);
+}
+
