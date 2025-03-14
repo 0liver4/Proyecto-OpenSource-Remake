@@ -24,5 +24,3 @@ const updateSupabaseRecord = async (data, table, column) => {
     console.log("Elemento editado correctamente");
     return true;
 };
-
-export default updateSupabaseRecord;
