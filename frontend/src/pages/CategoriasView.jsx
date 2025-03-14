@@ -1,10 +1,10 @@
-import Categorias from '../components/Categorias.jsx'
+import Farmacos from '../components/Farmacos.jsx';
 import '../css/BodySize.css'
 
 function CategoriasView() {
     return (
         <div className='BodyContent'>
-            <TipoFarmacos />
+            <Farmacos />
         </div>
     );
 }

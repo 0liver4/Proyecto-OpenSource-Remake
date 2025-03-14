@@ -39,7 +39,7 @@ function Sidebar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/tipos-farmacos"className={({ isActive }) => (isActive ? "active" : "")}>
+              <NavLink to="/categorias"className={({ isActive }) => (isActive ? "active" : "")}>
                 Tipos de Fármacos
               </NavLink>
             </li>
@@ -49,7 +49,7 @@ function Sidebar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/registro-visitas" className={({ isActive }) => (isActive ? "active" : "")}>
+              <NavLink to="/registroVisitas" className={({ isActive }) => (isActive ? "active" : "")}>
                 Registro de visitas
               </NavLink>
             </li>

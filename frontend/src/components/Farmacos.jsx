@@ -9,6 +9,7 @@ import EditButton from "./EditButton.jsx";
 import React, { useEffect, useState } from "react";
 import getAllData from "../../../Backend/controllers/Get.js";
 import DeletedSup from "../../../Backend/controllers/DeletedSup.js";
+import EditProductosForm from './EditProductosForm.jsx';
 
 const Farmacos = () => {
     const [data, setData] = useState([]);
@@ -121,12 +122,12 @@ const Farmacos = () => {
                 </table>
             </div>
 
-            {/* <EditFarmacosForm 
+            <EditProductosForm 
                 farmaco={currentItem}
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
-            /> */}
+            />
         </div>
     );
 };
