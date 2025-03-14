@@ -2,10 +2,35 @@
   z-index: 1;
   background-color: rgb(255, 255, 255);
   position: absolute;
-  top: 20vh;
-  margin-left: 20%;
-  margin-right: 5%;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2%;
+}
+
+@media (min-width: 800px) {
+  .Body {
+    left: 22vw;
+    top: 22.5vh;
+  }
+}
+
+@media (min-width: 1280px) {
+  .Body {
+    left: 20vw;
+    top: 20.5vh;
+  }
+}
+
+@media (min-width: 1600px) {
+  .Body {
+    left: 19vw;
+    top: 16vh;
+  }
+}
+
+@media (min-width: 1980px) {
+  .Body {
+    left: 18vw;
+    top: 13vh;
+  }
 }

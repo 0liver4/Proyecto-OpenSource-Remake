@@ -1,0 +1,20 @@
+.Title_Content {
+    color: black;
+}
+
+
+.tablaMedicos {
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tablaMedicos th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.selected {
+    background-color: lightblue; /* Color para la fila seleccionada */
+}
