@@ -14,7 +14,7 @@ import EditProductosForm from './EditProductosForm.jsx';
 const Farmacos = () => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
-    const [currentItem, setCurrentItem] = useState(null);
+    const [currentItem, setCurrentItem] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
@@ -123,7 +123,7 @@ const Farmacos = () => {
             </div>
 
             <EditProductosForm 
-                farmaco={currentItem}
+                currentItem={currentItem }
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
