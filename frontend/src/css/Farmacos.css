@@ -4,17 +4,14 @@
 
 
 .tablaFarmacos{
-    border: 2px solid black;
     border-collapse: collapse;
     width: 100%;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.tablaFarmacos th, td {
-    border: 1px solid black;
+.tablaFarmacos th, .tablaFarmacos td {
     padding: 8px;
     text-align: left;
+    border-bottom: 1px solid #cbcbcb;
 }
 
-.selected {
-    background-color: lightblue; /* Color para la fila seleccionada */
-}

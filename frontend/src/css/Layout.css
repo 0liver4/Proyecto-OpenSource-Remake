@@ -26,7 +26,6 @@
     width: 17%;
     height: 99vh;
     background-color: rgb(255, 255, 255);
-    padding: 5px;
 }
 
 .Logo{
@@ -59,6 +58,7 @@ h1{
     text-decoration: none;
     color: rgba(160, 160, 160, 1);
     padding: 10px;
+    padding-left: 30px;
     display: block;
     transition: background 0.3s;
   }
@@ -75,12 +75,18 @@ h1{
     color: rgba(1, 88, 167, 1) /* Color azul */
   }
   
-
+.container-options{
+    display: flex;
+    gap: 10px;
+}
+.icon-option{
+    width: 20px;
+    height: 100%;
+}
 li{
     list-style: none;
     padding-top: 2.5%;
     padding-bottom: 2.5%;
-    padding-left: 2.5%;
 }
 
 li.active{
@@ -90,5 +96,5 @@ li.active{
 
 ul{
     margin-top: 15%;
-    padding-left: 10%;
+    padding-inline-start: 0;
 }

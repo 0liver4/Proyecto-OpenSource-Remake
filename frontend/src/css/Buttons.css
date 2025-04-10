@@ -15,7 +15,7 @@
     width: 80px;            /* Tamaño fijo en lugar de min/max */
     height: 40px;           /* Tamaño fijo en lugar de min/max */
     color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 0;
     padding: 0;             /* Padding fijo en lugar de porcentaje */
     margin: 10px;          /* Margen fijo en lugar de porcentaje */
@@ -39,11 +39,11 @@
   }
   
   .Add {
-    background-color: green;
+    background-color: rgba(1, 88, 167, 1);
   }
   
   .Edit {
-    background-color: blue;
+    background-color: rgb(213, 180, 13);
   }
   
   /* Efectos hover */
@@ -52,9 +52,9 @@
   }
   
   .Add:hover {
-    background-color: darkgreen;
+    background-color: rgb(4, 64, 120);
   }
   
   .Edit:hover {
-    background-color: darkblue;
+    background-color: rgb(167, 140, 10);
   }
