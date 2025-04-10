@@ -10,11 +10,11 @@ Se trata del proyecto final de la materia **Desarrollo de software con tecnolog�
 
 **Cheyernex Manzanillo | A00112143 | Database**
 
-**Teófilo Valdez Santos | A00112545 | Back-end & front-end**
+**Teófilo Valdez Santos | A00112545 | Documentación**
 
 ## _Instalación_ 📦
 _N/A_
 
 ## _Información_ ℹ️
-user login= admin@unapec.edu.do
-password= 1234
+Login de usuario: admin@unapec.edu.do
+Contraseña: 1234
