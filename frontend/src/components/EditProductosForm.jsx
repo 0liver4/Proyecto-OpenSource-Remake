@@ -3,7 +3,7 @@ import '../css/Farmacos.css';
 import '../css/Modal.css';
 import EditSup from '../../../Backend/controllers/EditSup.js';
 
-const EditProductosForm = ({ currentItem, farmacos, onClose, onSuccess, isOpen }) => {
+const EditProductosForm = ({ currentItem, onClose, onSuccess, isOpen }) => {
 
     const [formData, setFormData] = useState({
         id_producto: "",
@@ -36,7 +36,7 @@ const EditProductosForm = ({ currentItem, farmacos, onClose, onSuccess, isOpen }
         if (!formData.nomproducto) tempErrors.nomproducto = 'El nombre del producto es obligatorio';
         if (!formData.catproducto) tempErrors.catproducto = 'La categoría del producto es obligatoria';
         if (!formData.descproducto) tempErrors.descproducto = 'La descripción es obligatoria';
-        if (!formData.marcaproducto) tempErrors.marcaproducto = 'La marca del producto es obligatoria';
+        
 
         setErrors(tempErrors);
         return Object.keys(tempErrors).length === 0;
@@ -54,14 +54,22 @@ const EditProductosForm = ({ currentItem, farmacos, onClose, onSuccess, isOpen }
     const updateTipoPaciente = async (formData) => {
         try {
             const success = await EditSup(
-                { ...formData,
-                id_producto: currentItem.id_producto ?? null },
-
+                {
+                    ...formData,
+                    id_producto: currentItem.id_producto ?? null
+                },
+                "productos",       // 👈 nombre de la tabla en Supabase
+                "id_producto"     // 👈 nombre de la columna clave primaria
             );
+    
+            if (!success) {
+                console.error("La actualización falló.");
+            }
         } catch (error) {
             console.error("Error al actualizar el tipo de paciente:", error);
         }
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,7 +80,7 @@ const EditProductosForm = ({ currentItem, farmacos, onClose, onSuccess, isOpen }
         await updateTipoPaciente(formData);
 
         try {
-            const success = await EditSup(formData, 'farmacos', 'id_producto');
+            const success = await EditSup(formData, 'productos', 'id_producto');
 
             if (success) {
                 onSuccess();
@@ -136,17 +144,7 @@ const EditProductosForm = ({ currentItem, farmacos, onClose, onSuccess, isOpen }
                             {errors.descproducto && <span className='error'>{errors.descproducto}</span>}
                         </div>
 
-                        <div className='form-group'>
-                            <label htmlFor='marcaproducto'>Marca:</label>
-                            <input
-                                type='number'
-                                id='marcaproducto'
-                                name='marcaproducto'
-                                value={formData.marcaproducto}
-                                onChange={handleChange}
-                            />
-                            {errors.marcaproducto && <span className='error'>{errors.marcaproducto}</span>}
-                        </div>
+                        
 
                         <div className='modal-footer'>
                             <button

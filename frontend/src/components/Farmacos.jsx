@@ -4,18 +4,19 @@ import '../css/Modal.css';
 import DeleteButton from "./DeleteButton.jsx";
 import AddButton from "./AddButton.jsx";
 import EditButton from "./EditButton.jsx";
-// import EditFarmacosForm from "./EditFarmacosForm.jsx";
+import EditProductosForm from "./EditProductosForm.jsx";
+import AddProductosForm from "./AddProductosForm.jsx";
 
 import React, { useEffect, useState } from "react";
 import getAllData from "../../../Backend/controllers/Get.js";
 import DeletedSup from "../../../Backend/controllers/DeletedSup.js";
-import EditProductosForm from './EditProductosForm.jsx';
 
 const Farmacos = () => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
-    const [currentItem, setCurrentItem] = useState("");
+    const [currentItem, setCurrentItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalAddOpen, setIsModalAddOpen] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -23,7 +24,7 @@ const Farmacos = () => {
 
     const fetchData = async () => {
         try {
-            const result = await getAllData("farmacos");
+            const result = await getAllData("productos");
             const sortedData = result.sort((a, b) => a.id_producto - b.id_producto);
             setData(sortedData);
         } catch (err) {
@@ -46,7 +47,7 @@ const Farmacos = () => {
         if (window.confirm("¿Está seguro que desea eliminar este fármaco?")) {
             const done = await DeletedSup(
                 currentItem.id_producto,
-                "farmacos",
+                "productos",
                 "id_producto"
             );
 
@@ -69,6 +70,7 @@ const Farmacos = () => {
 
     const Añadir = async () => {
         console.log("Abrir formulario para añadir un nuevo fármaco");
+        setIsModalAddOpen(true);
     };
 
     const handleEditSuccess = () => {
@@ -77,6 +79,7 @@ const Farmacos = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setIsModalAddOpen(false);
     };
 
     return (
@@ -109,8 +112,7 @@ const Farmacos = () => {
                             <tr
                                 key={index}
                                 onClick={() => handleEachRowByClick(item)}
-                                className={currentItem?.id_producto === item.id_producto ? "selected" : ""}
-                            >
+                                className={currentItem?.id_producto === item.id_producto ? "selected" : ""}>
                                 <td>{item.id_producto}</td>
                                 <td>{item.nomproducto}</td>
                                 <td>{item.catproducto}</td>
@@ -128,6 +130,12 @@ const Farmacos = () => {
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
             />
+
+        <AddProductosForm
+            onClose={closeModal}
+            isOpen={isModalAddOpen}
+            onSuccess={handleEditSuccess}
+        />
         </div>
     );
 };

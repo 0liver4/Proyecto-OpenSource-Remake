@@ -22,7 +22,7 @@ const Ubicaciones = () => {
 
     const fetchData = async () => {
         try {
-            const result = await getAllData("ubicacion");
+            const result = await getAllData("almacenar");
             const sortedData = result.sort((a, b) => a.id_apartado - b.id_apartado);
             setData(sortedData);
         } catch (err) {

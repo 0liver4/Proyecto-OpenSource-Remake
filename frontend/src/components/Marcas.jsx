@@ -4,7 +4,8 @@ import '../css/Modal.css';
 import DeleteButton from "./DeleteButton.jsx";
 import AddButton from "./AddButton.jsx";
 import EditButton from "./EditButton.jsx";
-// import EditMarcasForm from "./EditMarcasForm.jsx";
+import EditMarcasForm from "./EditMarcasForm.jsx";
+import AddMarcasForm from "./AddMarcasForm.jsx";
 
 import React, { useEffect, useState } from "react";
 import getAllData from "../../../Backend/controllers/Get.js";
@@ -15,6 +16,7 @@ const Marcas = () => {
     const [error, setError] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalAddOpen, setIsModalAddOpen] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -68,6 +70,7 @@ const Marcas = () => {
 
     const Añadir = async () => {
         console.log("Abrir formulario para añadir una nueva marca");
+        setIsModalAddOpen(true);
     };
 
     const handleEditSuccess = () => {
@@ -76,6 +79,7 @@ const Marcas = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setIsModalAddOpen(false);
     };
 
     return (
@@ -115,12 +119,18 @@ const Marcas = () => {
                 </table>
             </div>
 
-            {/* <EditFarmacosForm 
-                farmaco={currentItem}
+            <EditMarcasForm 
+                marca={currentItem}
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
-            /> */}
+            />
+
+        <AddMarcasForm
+            onClose={closeModal}
+            isOpen={isModalAddOpen}
+            onSuccess={handleEditSuccess}/>
+
         </div>
     );
 };

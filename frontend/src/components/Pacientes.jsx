@@ -1,11 +1,12 @@
 import '../css/Paciente.css';
 import '../css/Buttons.css';
 import '../css/Modal.css';
+import Modal from 'react-modal';
 import DeleteButton from "./DeleteButton.jsx";
 import AddButton from "./AddButton.jsx";
 import EditButton from "./EditButton.jsx";
 import EditPacientesForm from "./EditPacientesForm.jsx";
-
+import AddPacientesForm from "./AddPacientesForm.jsx";
 import React, { useEffect, useState } from "react";
 import getAllData from "../../../Backend/controllers/Get.js";
 import DeletedSup from "../../../Backend/controllers/DeletedSup.js";
@@ -15,6 +16,7 @@ const Pacientes = () => {
     const [error, setError] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalAddOpen, setIsModalAddOpen] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -67,7 +69,8 @@ const Pacientes = () => {
     };
 
     const Añadir = async () => {
-        console.log("Abrir formulario para añadir un nuevo paciente");
+        console.log("Abrir formulario para agregar un nuevo paciente"); 
+        setIsModalAddOpen(true);
     };
 
     const handleEditSuccess = () => {
@@ -76,6 +79,7 @@ const Pacientes = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setIsModalAddOpen(false);
     };
 
     return (
@@ -127,6 +131,13 @@ const Pacientes = () => {
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
             />
+
+            <AddPacientesForm
+            onClose={closeModal}
+            isOpen={isModalAddOpen}
+            onSuccess={handleEditSuccess}
+            />
+
         </div>
     );
 };

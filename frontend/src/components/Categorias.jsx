@@ -4,7 +4,8 @@ import '../css/Modal.css';
 import DeleteButton from "./DeleteButton.jsx";
 import AddButton from "./AddButton.jsx";
 import EditButton from "./EditButton.jsx";
-// import EditTipoFarmacosForm from "./EditTipoFarmacosForm.jsx";
+import EditCategoriasForm from "./EditCategoriasForm.jsx";
+import AddCategoriasForm from "./AddCategoriasForm.jsx";
 
 import React, { useEffect, useState } from "react";
 import getAllData from "../../../Backend/controllers/Get.js";
@@ -15,6 +16,7 @@ const Categorias = () => {
     const [error, setError] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalAddOpen, setIsModalAddOpen] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -63,11 +65,14 @@ const Categorias = () => {
             alert("Debe seleccionar una fila para editar");
             return;
         }
+        console.log("Current item:", currentItem); // Verifica que tengas datos
         setIsModalOpen(true);
+        console.log("Modal should be open now"); // Verifica si esta línea se ejecuta
     };
 
     const Añadir = async () => {
         console.log("Abrir formulario para añadir un nuevo tipo de fármaco");
+        setIsModalAddOpen(true);
     };
 
     const handleEditSuccess = () => {
@@ -76,6 +81,7 @@ const Categorias = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setIsModalAddOpen(false);
     };
 
     return (
@@ -115,12 +121,19 @@ const Categorias = () => {
                 </table>
             </div>
 
-            {/* <EditPacientesForm 
-                paciente={currentItem}
+            <EditCategoriasForm 
+                categoria={currentItem}
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
-            /> */}
+            />
+
+            <AddCategoriasForm
+            onClose={closeModal}
+            isOpen={isModalAddOpen}
+            onSuccess={handleEditSuccess}
+            />
+
         </div>
     );
 };
