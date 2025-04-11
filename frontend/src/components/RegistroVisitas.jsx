@@ -13,10 +13,18 @@ import DeletedSup from "../../../Backend/controllers/DeletedSup.js";
 
 const RegistroVisitas = () => {
     const [data, setData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
     const [error, setError] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+
+    const [filtroMedico, setFiltroMedico] = useState("");
+    const [filtroPaciente, setFiltroPaciente] = useState("");
+    const [filtroFecha, setFiltroFecha] = useState("");
+
+    const [medicosUnicos, setMedicosUnicos] = useState([]);
+    const [pacientesUnicos, setPacientesUnicos] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -25,12 +33,42 @@ const RegistroVisitas = () => {
     const fetchData = async () => {
         try {
             const result = await getAllData("visitas");
+            console.log("Datos cargados:", result);
             const sortedData = result.sort((a, b) => a.id_visitas - b.id_visitas);
             setData(sortedData);
+            setFilteredData(sortedData);
+
+            const medicos = [...new Set(sortedData.map(item => item.medico))];
+            const pacientes = [...new Set(sortedData.map(item => item.paciente))];
+            setMedicosUnicos(medicos);
+            setPacientesUnicos(pacientes);
         } catch (err) {
             setError(err);
             console.error("Error al obtener los datos: ", err);
         }
+    };
+
+    const aplicarFiltros = () => {
+        console.log("Aplicando filtros...");
+
+        // Revisar valores de los filtros
+        console.log("Filtro médico:", filtroMedico);
+        console.log("Filtro paciente:", filtroPaciente);
+        console.log("Filtro fecha:", filtroFecha);
+
+        const filtrados = data.filter(item => {
+            const fechaItem = item.fecha; // 'YYYY-MM-DD' format
+            const fechaInput = filtroFecha ? new Date(filtroFecha).toISOString().split('T')[0] : ""; // 'YYYY-MM-DD'
+
+            return (
+                (!filtroMedico || item.medico === parseInt(filtroMedico)) &&
+                (!filtroPaciente || item.paciente === parseInt(filtroPaciente)) &&
+                (!filtroFecha || fechaItem === fechaInput)
+            );
+        });
+
+        console.log("Resultado filtrado:", filtrados);
+        setFilteredData(filtrados);
     };
 
     const handleEachRowByClick = (item) => {
@@ -53,6 +91,7 @@ const RegistroVisitas = () => {
 
             if (done) {
                 setData(data.filter(item => item.id_visitas !== currentItem.id_visitas));
+                setFilteredData(filteredData.filter(item => item.id_visitas !== currentItem.id_visitas));
                 setCurrentItem(null);
             } else {
                 alert("Hubo un error al eliminar el registro");
@@ -68,8 +107,7 @@ const RegistroVisitas = () => {
         setIsModalOpen(true);
     };
 
-    const Añadir = async () => {
-        console.log("Abrir formulario para añadir un nuevo registro");
+    const Añadir = () => {
         setIsModalAddOpen(true);
     };
 
@@ -82,6 +120,20 @@ const RegistroVisitas = () => {
         setIsModalAddOpen(false);
     };
 
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            aplicarFiltros();
+        }
+    };
+
+    const handleInputChange = (e, setFiltro) => {
+        // Solo aceptar números positivos
+        const value = e.target.value;
+        if (value === "" || /^[0-9]+$/.test(value)) {
+            setFiltro(value);
+        }
+    };
+
     return (
         <div className="RegistroVisitasBody">
             <div className="Title">
@@ -92,6 +144,34 @@ const RegistroVisitas = () => {
                 <AddButton onClick={Añadir} />
                 <EditButton onClick={Editar} />
                 <DeleteButton onClick={Eliminar} />
+            </div>
+
+            <div className="Filtros">
+                <input
+                    type="number"
+                    value={filtroMedico}
+                    onChange={(e) => handleInputChange(e, setFiltroMedico)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Filtrar por médico"
+                />
+
+                <input
+                    type="number"
+                    value={filtroPaciente}
+                    onChange={(e) => handleInputChange(e, setFiltroPaciente)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Filtrar por paciente"
+                />
+
+                <input
+                    type="date"
+                    value={filtroFecha}
+                    onChange={(e) => setFiltroFecha(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Filtrar por fecha"
+                />
+
+                <button onClick={aplicarFiltros}>Aplicar filtros</button>
             </div>
 
             <div>
@@ -111,7 +191,7 @@ const RegistroVisitas = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {filteredData.map((item, index) => (
                             <tr
                                 key={index}
                                 onClick={() => handleEachRowByClick(item)}
@@ -143,7 +223,6 @@ const RegistroVisitas = () => {
                 isOpen={isModalAddOpen}
                 onSuccess={handleEditSuccess}
             />
-        
         </div>
     );
 };

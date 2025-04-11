@@ -18,6 +18,9 @@ const Farmacos = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalAddOpen, setIsModalAddOpen] = useState(false);
 
+    const [filtroCategoria, setFiltroCategoria] = useState('');
+    const [filtroMarca, setFiltroMarca] = useState('');
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -82,6 +85,26 @@ const Farmacos = () => {
         setIsModalAddOpen(false);
     };
 
+    // Función de validación para que solo acepte números del 1 al 10
+    const handleFiltroChange = (e, tipo) => {
+        const value = e.target.value;
+
+        if (/^[1-9]$|^10$/.test(value) || value === '') {
+            if (tipo === 'categoria') {
+                setFiltroCategoria(value);
+            } else if (tipo === 'marca') {
+                setFiltroMarca(value);
+            }
+        }
+    };
+
+    // Aplicar filtro antes de renderizar
+    const productosFiltrados = data.filter((item) => {
+        const filtroPorCategoria = filtroCategoria ? item.catproducto == filtroCategoria : true;
+        const filtroPorMarca = filtroMarca ? item.marcaproducto == filtroMarca : true;
+        return filtroPorCategoria && filtroPorMarca;
+    });
+
     return (
         <div className="FarmacosBody">
             <div className="Title">
@@ -89,6 +112,31 @@ const Farmacos = () => {
             </div>
 
             <div className="ButtonContainer">
+
+                <div className="FiltroContainer">
+                    <label>Filtrar por categoría (1-10): </label>
+                    <input
+                        type="number"
+                        min="1"
+                        max="10"
+                        value={filtroCategoria}
+                        onChange={(e) => handleFiltroChange(e, 'categoria')}
+                        placeholder="Ej. 1, 2, 3..."
+                    />
+                </div>
+
+                <div className="FiltroContainer">
+                    <label>Filtrar por marca (1-10): </label>
+                    <input
+                        type="number"
+                        min="1"
+                        max="10"
+                        value={filtroMarca}
+                        onChange={(e) => handleFiltroChange(e, 'marca')}
+                        placeholder="Ej. 1, 2, 3..."
+                    />
+                </div>
+
                 <AddButton onClick={Añadir} />
                 <EditButton onClick={Editar} />
                 <DeleteButton onClick={Eliminar} />
@@ -108,11 +156,12 @@ const Farmacos = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {productosFiltrados.map((item, index) => (
                             <tr
                                 key={index}
                                 onClick={() => handleEachRowByClick(item)}
-                                className={currentItem?.id_producto === item.id_producto ? "selected" : ""}>
+                                className={currentItem?.id_producto === item.id_producto ? "selected" : ""}
+                            >
                                 <td>{item.id_producto}</td>
                                 <td>{item.nomproducto}</td>
                                 <td>{item.catproducto}</td>
@@ -124,18 +173,18 @@ const Farmacos = () => {
                 </table>
             </div>
 
-            <EditProductosForm 
-                currentItem={currentItem }
+            <EditProductosForm
+                currentItem={currentItem}
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
             />
 
-        <AddProductosForm
-            onClose={closeModal}
-            isOpen={isModalAddOpen}
-            onSuccess={handleEditSuccess}
-        />
+            <AddProductosForm
+                onClose={closeModal}
+                isOpen={isModalAddOpen}
+                onSuccess={handleEditSuccess}
+            />
         </div>
     );
 };

@@ -18,6 +18,11 @@ const Ubicaciones = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalAddOpen, setIsModalAddOpen] = useState(false);
 
+    const [filtroAlmacen, setFiltroAlmacen] = useState('');
+    const [filtroEstante, setFiltroEstante] = useState('');
+    const [filtroTramo, setFiltroTramo] = useState('');
+    const [filtroCelda, setFiltroCelda] = useState('');
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -74,13 +79,27 @@ const Ubicaciones = () => {
     };
 
     const handleEditSuccess = () => {
-        fetchData(); // Recargar datos después de editar
+        fetchData();
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
         setIsModalAddOpen(false);
     };
+
+    const obtenerOpcionesUnicas = (campo) => {
+        const valores = data.map((item) => item[campo]);
+        return [...new Set(valores)];
+    };
+
+    const ubicacionesFiltradas = data.filter((item) => {
+        const cumpleAlmacen = filtroAlmacen === '' || item.descalmacenar === filtroAlmacen;
+        const cumpleEstante = filtroEstante === '' || item.estante === filtroEstante;
+        const cumpleTramo = filtroTramo === '' || item.tramo === filtroTramo;
+        const cumpleCelda = filtroCelda === '' || item.celda === filtroCelda;
+
+        return cumpleAlmacen && cumpleEstante && cumpleTramo && cumpleCelda;
+    });
 
     return (
         <div className="UbicacionesBody">
@@ -89,6 +108,49 @@ const Ubicaciones = () => {
             </div>
 
             <div className="ButtonContainer">
+
+                <div className="FiltrosContainer">
+                    <div className="FiltroItem">
+                        <label>Filtrar por Almacén:</label>
+                        <select value={filtroAlmacen} onChange={(e) => setFiltroAlmacen(e.target.value)}>
+                            <option value="">Todos</option>
+                            {obtenerOpcionesUnicas("descalmacenar").map((op, index) => (
+                                <option key={index} value={op}>{op}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="FiltroItem">
+                        <label>Filtrar por Estante:</label>
+                        <select value={filtroEstante} onChange={(e) => setFiltroEstante(e.target.value)}>
+                            <option value="">Todos</option>
+                            {obtenerOpcionesUnicas("estante").map((op, index) => (
+                                <option key={index} value={op}>{op}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="FiltroItem">
+                        <label>Filtrar por Tramo:</label>
+                        <select value={filtroTramo} onChange={(e) => setFiltroTramo(e.target.value)}>
+                            <option value="">Todos</option>
+                            {obtenerOpcionesUnicas("tramo").map((op, index) => (
+                                <option key={index} value={op}>{op}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="FiltroItem">
+                        <label>Filtrar por Celda:</label>
+                        <select value={filtroCelda} onChange={(e) => setFiltroCelda(e.target.value)}>
+                            <option value="">Todos</option>
+                            {obtenerOpcionesUnicas("celda").map((op, index) => (
+                                <option key={index} value={op}>{op}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+
                 <AddButton onClick={Añadir} />
                 <EditButton onClick={Editar} />
                 <DeleteButton onClick={Eliminar} />
@@ -108,7 +170,7 @@ const Ubicaciones = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {ubicacionesFiltradas.map((item, index) => (
                             <tr
                                 key={index}
                                 onClick={() => handleEachRowByClick(item)}
@@ -125,7 +187,7 @@ const Ubicaciones = () => {
                 </table>
             </div>
 
-            <EditUbicacionesForm 
+            <EditUbicacionesForm
                 almacenar={currentItem}
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
@@ -137,7 +199,6 @@ const Ubicaciones = () => {
                 isOpen={isModalAddOpen}
                 onSuccess={handleEditSuccess}
             />
-
         </div>
     );
 };
