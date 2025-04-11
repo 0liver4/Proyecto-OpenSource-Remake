@@ -1,20 +1,25 @@
 import '../css/Paciente.css';
 import '../css/Buttons.css';
 import '../css/Modal.css';
+import Modal from 'react-modal';
 import DeleteButton from "./DeleteButton.jsx";
 import AddButton from "./AddButton.jsx";
 import EditButton from "./EditButton.jsx";
 import EditPacientesForm from "./EditPacientesForm.jsx";
-
+import AddPacientesForm from "./AddPacientesForm.jsx";
 import React, { useEffect, useState } from "react";
 import getAllData from "../../../Backend/controllers/Get.js";
 import DeletedSup from "../../../Backend/controllers/DeletedSup.js";
+
+// ... tus imports arriba no cambian
 
 const Pacientes = () => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+    const [filtroTipoPaciente, setFiltroTipoPaciente] = useState('');
 
     useEffect(() => {
         fetchData();
@@ -67,7 +72,8 @@ const Pacientes = () => {
     };
 
     const Añadir = async () => {
-        console.log("Abrir formulario para añadir un nuevo paciente");
+        console.log("Abrir formulario para agregar un nuevo paciente");
+        setIsModalAddOpen(true);
     };
 
     const handleEditSuccess = () => {
@@ -76,7 +82,15 @@ const Pacientes = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setIsModalAddOpen(false);
     };
+
+    // Aplicar filtro antes de renderizar
+    const pacientesFiltrados = data.filter((item) => {
+        return (
+            !filtroTipoPaciente || [1, 2, 3].includes(parseInt(filtroTipoPaciente)) && item.tipopaciente === parseInt(filtroTipoPaciente)
+        );
+    });
 
     return (
         <div className="PacientesBody">
@@ -85,9 +99,21 @@ const Pacientes = () => {
             </div>
 
             <div className="ButtonContainer">
-                <DeleteButton onClick={Eliminar} />
+                <div className="FiltroContainer">
+                    <label>Filtrar por tipo de paciente: </label>
+                    <input
+                        type="number"
+                        placeholder="1, 2, 3"
+                        value={filtroTipoPaciente}
+                        onChange={(e) => setFiltroTipoPaciente(e.target.value)}
+                        min="1"
+                        max="3"
+                    />
+                </div>
+
                 <AddButton onClick={Añadir} />
                 <EditButton onClick={Editar} />
+                <DeleteButton onClick={Eliminar} />
             </div>
 
             <div>
@@ -104,7 +130,7 @@ const Pacientes = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {pacientesFiltrados.map((item, index) => (
                             <tr
                                 key={index}
                                 onClick={() => handleEachRowByClick(item)}
@@ -126,6 +152,12 @@ const Pacientes = () => {
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
+            />
+
+            <AddPacientesForm
+                onClose={closeModal}
+                isOpen={isModalAddOpen}
+                onSuccess={handleEditSuccess}
             />
         </div>
     );

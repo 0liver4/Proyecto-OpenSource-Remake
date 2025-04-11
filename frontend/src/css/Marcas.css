@@ -1,0 +1,17 @@
+.Title_Content{
+    color: black;
+}
+
+
+.tablaMarcas{
+    border-collapse: collapse;
+    width: 100%;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tablaMarcas th, .tablaMarcas td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #cbcbcb;
+}
+

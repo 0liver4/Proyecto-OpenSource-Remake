@@ -1,0 +1,19 @@
+.Title_Content{
+    color: black;
+    margin-top: 0;
+    margin-bottom:0;
+    font-size:3rem;
+}
+
+
+.tablaRegistroVisitas{
+    border-collapse: collapse;
+    width: 100%;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tablaRegistroVisitas th, .tablaRegistroVisitas td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #cbcbcb;
+}
