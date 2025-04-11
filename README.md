@@ -8,13 +8,14 @@ Se trata del proyecto final de la materia **Desarrollo de software con tecnolog�
 
 **Caroline Ninoska Pérez | A00112688 | Front-end**
 
-**Cheyernex Manzanillo | A00112143 | Database**
+**Cheyernex Manzanillo | A00112143 | Query de la BD**
 
-**Teófilo Valdez Santos | A00112545 | Documentación**
+**Teófilo Valdez Santos | A00112545 | Documento visión**
 
 ## _Instalación_ 📦
 _N/A_
 
 ## _Información_ ℹ️
 Login de usuario: admin@unapec.edu.do
+
 Contraseña: 1234
