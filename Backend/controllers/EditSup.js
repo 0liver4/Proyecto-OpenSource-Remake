@@ -2,7 +2,7 @@ import getSupabaseClient from "../../Backend/config/supabase";
 
 const EditSup = async (data, tabla, columna) => {
     const supabase = getSupabaseClient();
-    const id = data[columna]; // Se obtiene el ID usando el nombre de columna clave
+    const id = data[columna]; // Se obtiene el ID usando el nombre de columna clavea
 
     console.log(data, '📦 Datos recibidos para actualizar');
     console.log(id, '🔑 ID extraído para búsqueda');
