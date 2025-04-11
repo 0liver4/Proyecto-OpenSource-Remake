@@ -62,13 +62,13 @@ const EditCategoriasForm = ({ categoria, onClose, onSuccess, isOpen }) => {
         <div className="modal-backdrop">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h2>Editar Categoría</h2>
+                    <h2>Editar categoría</h2>
                     <button className="modal-close" onClick={onClose}>&times;</button>
                 </div>
                 <div className="modal-body">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="nomcategoria">Nombre de Categoría:</label>
+                            <label htmlFor="nomcategoria">Nombre de categoría:</label>
                             <input
                                 type="text"
                                 id="nomcategoria"

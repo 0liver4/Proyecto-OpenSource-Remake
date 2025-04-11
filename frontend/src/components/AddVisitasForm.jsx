@@ -62,18 +62,18 @@ const AddVisitasForm = ({ onClose, onSuccess, isOpen }) => {
         <div className="modal-backdrop">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h2>Nueva Visita</h2>
+                    <h2>Nueva visita</h2>
                     <button className="modal-close" onClick={onClose}>&times;</button>
                 </div>
                 <div className="modal-body">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="medico">ID Médico:</label>
+                            <label htmlFor="medico">ID médico:</label>
                             <input type="number" id="medico" name="medico" value={formData.medico} onChange={handleChange} />
                             {errors.medico && <span className="error">{errors.medico}</span>}
                         </div>
                         <div className="form-group">
-                            <label htmlFor="paciente">ID Paciente:</label>
+                            <label htmlFor="paciente">ID paciente:</label>
                             <input type="number" id="paciente" name="paciente" value={formData.paciente} onChange={handleChange} />
                             {errors.paciente && <span className="error">{errors.paciente}</span>}
                         </div>

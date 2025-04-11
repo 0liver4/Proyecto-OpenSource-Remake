@@ -57,7 +57,7 @@ const AddMedicosForm = ({ onClose, onSuccess, isOpen }) => {
         <div className="modal-backdrop">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h2>Nuevo Médico</h2>
+                    <h2>Nuevo médico</h2>
                     <button className="modal-close" onClick={onClose}>&times;</button>
                 </div>
                 <div className="modal-body">

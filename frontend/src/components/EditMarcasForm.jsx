@@ -62,13 +62,13 @@ const EditMarcasForm = ({ marca, onClose, onSuccess, isOpen }) => {
         <div className="modal-backdrop">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h2>Editar Marca</h2>
+                    <h2>Editar marca</h2>
                     <button className="modal-close" onClick={onClose}>&times;</button>
                 </div>
                 <div className="modal-body">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="nommarcas">Nombre de Marca:</label>
+                            <label htmlFor="nommarcas">Nombre de marca:</label>
                             <input
                                 type="text"
                                 id="nommarcas"

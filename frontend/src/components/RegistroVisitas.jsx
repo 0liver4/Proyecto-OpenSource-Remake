@@ -4,7 +4,8 @@ import '../css/Modal.css';
 import DeleteButton from "./DeleteButton.jsx";
 import AddButton from "./AddButton.jsx";
 import EditButton from "./EditButton.jsx";
-// import EditRegistroVisitasForm from "./EditRegistroVisitasForm.jsx";
+import EditRegistroVisitasForm from "./EditRegistroVisitasForm.jsx";
+import AddVisitasForm from "./AddVisitasForm.jsx";
 
 import React, { useEffect, useState } from "react";
 import getAllData from "../../../Backend/controllers/Get.js";
@@ -15,6 +16,7 @@ const RegistroVisitas = () => {
     const [error, setError] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalAddOpen, setIsModalAddOpen] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -68,6 +70,7 @@ const RegistroVisitas = () => {
 
     const Añadir = async () => {
         console.log("Abrir formulario para añadir un nuevo registro");
+        setIsModalAddOpen(true);
     };
 
     const handleEditSuccess = () => {
@@ -76,6 +79,7 @@ const RegistroVisitas = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setIsModalAddOpen(false);
     };
 
     return (
@@ -85,9 +89,9 @@ const RegistroVisitas = () => {
             </div>
 
             <div className="ButtonContainer">
-                <DeleteButton onClick={Eliminar} />
                 <AddButton onClick={Añadir} />
                 <EditButton onClick={Editar} />
+                <DeleteButton onClick={Eliminar} />
             </div>
 
             <div>
@@ -127,12 +131,19 @@ const RegistroVisitas = () => {
                 </table>
             </div>
 
-            {/* <EditPacientesForm 
-                paciente={currentItem}
+            <EditRegistroVisitasForm 
+                visitas={currentItem}
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
-            /> */}
+            />
+
+            <AddVisitasForm
+                onClose={closeModal}
+                isOpen={isModalAddOpen}
+                onSuccess={handleEditSuccess}
+            />
+        
         </div>
     );
 };

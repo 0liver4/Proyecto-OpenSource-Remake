@@ -4,7 +4,8 @@ import '../css/Modal.css';
 import DeleteButton from "./DeleteButton.jsx";
 import AddButton from "./AddButton.jsx";
 import EditButton from "./EditButton.jsx";
-// import EditMedicosForm from "./EditMedicosForm.jsx";
+import EditMedicosForm from "./EditMedicosForm.jsx";
+import AddMedicosForm from "./AddMedicosForm.jsx";
 
 import React, { useEffect, useState } from "react";
 import getAllData from "../../../Backend/controllers/Get.js";
@@ -15,6 +16,7 @@ const Medicos = () => {
     const [error, setError] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalAddOpen, setIsModalAddOpen] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -68,6 +70,7 @@ const Medicos = () => {
 
     const Añadir = async () => {
         console.log("Abrir formulario para añadir un nuevo médico");
+        setIsModalAddOpen(true);
     };
 
     const handleEditSuccess = () => {
@@ -76,6 +79,7 @@ const Medicos = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setIsModalAddOpen(false);
     };
 
     return (
@@ -85,9 +89,9 @@ const Medicos = () => {
             </div>
 
             <div className="ButtonContainer">
-                <DeleteButton onClick={Eliminar} />
                 <AddButton onClick={Añadir} />
                 <EditButton onClick={Editar} />
+                <DeleteButton onClick={Eliminar} />
             </div>
 
             <div>
@@ -121,12 +125,19 @@ const Medicos = () => {
                 </table>
             </div>
 
-            {/* <EditPacientesForm 
-                paciente={currentItem}
+            <EditMedicosForm 
+                medicos={currentItem}
                 onClose={closeModal}
                 onSuccess={handleEditSuccess}
                 isOpen={isModalOpen}
-            /> */}
+            />
+
+            <AddMedicosForm
+                onClose={closeModal}
+                isOpen={isModalAddOpen}
+                onSuccess={handleEditSuccess}
+            />
+
         </div>
     );
 };

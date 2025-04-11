@@ -68,7 +68,7 @@ function Sidebar() {
               <NavLink to="/categorias"className={({ isActive }) => (isActive ? "active" : "")}>
               <div className="container-options">
               <AiOutlineMedicineBox />
-                Tipos de Fármacos
+                Tipos de fármacos
               </div>
               </NavLink>
             </li>

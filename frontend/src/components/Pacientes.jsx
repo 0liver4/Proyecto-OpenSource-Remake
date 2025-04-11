@@ -90,7 +90,7 @@ const Pacientes = () => {
 
             <div className="ButtonContainer">
                 <AddButton onClick={Añadir} />
-                <EditButton onClick={Editar} /> 
+                <EditButton onClick={Editar} />
                 <DeleteButton onClick={Eliminar} />
             </div>
 

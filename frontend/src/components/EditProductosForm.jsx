@@ -102,7 +102,7 @@ const EditProductosForm = ({ currentItem, onClose, onSuccess, isOpen }) => {
         <div className='modal-backdrop'>
             <div className='modal-content'>
                 <div className='modal-header'>
-                    <h2>Editar Producto</h2>
+                    <h2>Editar producto</h2>
                     <button className='modal-close' onClick={onClose}>&times;</button>
                 </div>
 
@@ -110,7 +110,7 @@ const EditProductosForm = ({ currentItem, onClose, onSuccess, isOpen }) => {
                     <form onSubmit={handleSubmit}>
 
                         <div className='form-group'>
-                            <label htmlFor='nomproducto'>Nombre del Producto:</label>
+                            <label htmlFor='nomproducto'>Nombre del producto:</label>
                             <input
                                 type='text'
                                 id='nomproducto'

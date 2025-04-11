@@ -56,7 +56,7 @@ const AddUbicacionesForm = ({ onClose, onSuccess, isOpen }) => {
         <div className="modal-backdrop">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h2>Nueva Ubicación</h2>
+                    <h2>Nueva ubicación</h2>
                     <button className="modal-close" onClick={onClose}>&times;</button>
                 </div>
                 <div className="modal-body">

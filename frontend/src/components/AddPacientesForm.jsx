@@ -65,7 +65,7 @@ const AddPacientesForm = ({ onClose, onSuccess, isOpen }) => {
         <div className="modal-backdrop">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h2>Nuevo Paciente</h2>
+                    <h2>Nuevo paciente</h2>
                     <button className="modal-close" onClick={onClose}>&times;</button>
                 </div>
 
@@ -96,7 +96,7 @@ const AddPacientesForm = ({ onClose, onSuccess, isOpen }) => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="numcarnet">Número de Carnet:</label>
+                            <label htmlFor="numcarnet">Número de carnet:</label>
                             <input 
                                 type="text" 
                                 id="numcarnet" 
@@ -108,7 +108,7 @@ const AddPacientesForm = ({ onClose, onSuccess, isOpen }) => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="tipopaciente">Tipo de Paciente:</label>
+                            <label htmlFor="tipopaciente">Tipo de paciente:</label>
                             <select 
                                 id="tipopaciente" 
                                 name="tipopaciente"
