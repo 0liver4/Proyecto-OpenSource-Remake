@@ -1,28 +1,29 @@
 import getSupabaseClient from "../../Backend/config/supabase";
 
-const updateSupabaseRecord = async (data, table, column) => {
-    const id = data.id_paciente || data.id_producto;
+const EditSup = async (data, tabla, columna) => {
     const supabase = getSupabaseClient();
+    const id = data[columna]; // Se obtiene el ID usando el nombre de columna clavea
+
+    console.log(data, '📦 Datos recibidos para actualizar');
+    console.log(id, '🔑 ID extraído para búsqueda');
 
     if (!id) {
-        console.error("Error: ID no proporcionado. Se esperaba 'id_paciente' o 'id_producto'.");
+        console.error(`❌ Error: No se proporcionó valor para la columna clave '${columna}'`);
         return false;
     }
-
-    console.log(`Attempting to update record with ID: ${id}`);
 
     const { error } = await supabase
-        .from(table)
+        .from(tabla)
         .update(data)
-        .eq(column, id);
+        .eq(columna, id);
 
     if (error) {
-        console.error("Hubo un error al editar:", error.message);
+        console.error("❌ Hubo un error al editar:", error.message);
         return false;
     }
 
-    console.log("Elemento editado correctamente");
+    console.log("✅ Elemento editado correctamente");
     return true;
 };
 
-export default updateSupabaseRecord;
+export default EditSup;
