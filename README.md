@@ -30,6 +30,6 @@ npm run dev
 8. Finally, press CTRL and click the localhost link in the frontend terminal. The project should be running in the browser.
 
 ## _Info_ ℹ️
-Login de usuario: admin@unapec.edu.do
+Login email: admin@unapec.edu.do
 
-Contraseña: 1234
+Password: 1234
